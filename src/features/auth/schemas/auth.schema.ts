@@ -3,10 +3,17 @@ import * as z from "zod";
 export const sendOtpSchema = z.object({
   phoneNumber: z
     .string()
-    .regex(/^(\\+98|0)?9\\d{9}$/, "لطفا شماره موبایل معتبر را وارد کنید."),
+    .regex(
+      /^(\+98|0|98|0098)?([ \-()]){0,2}9[0-9]([ \-()]){0,2}(?:[0-9]([ \-()]){0,2}){8}$/,
+      "لطفا شماره موبایل معتبر را وارد کنید.",
+    ),
 });
 export const checkOtpSchema = z.object({
-  phoneNumber: z.string().regex(/^(\\+98|0)?9\\d{9}$/),
+  phoneNumber: z
+    .string()
+    .regex(
+      /^(\+98|0|98|0098)?([ \-()]){0,2}9[0-9]([ \-()]){0,2}(?:[0-9]([ \-()]){0,2}){8}$/,
+    ),
   code: z
     .string()
     .length(5, "کد تایید ۵ رقم می باشد")
