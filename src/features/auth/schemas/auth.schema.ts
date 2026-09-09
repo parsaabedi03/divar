@@ -1,7 +1,7 @@
 import * as z from "zod";
 
 export const sendOtpSchema = z.object({
-  phoneNumber: z
+  mobile: z
     .string()
     .regex(
       /^(\+98|0|98|0098)?([ \-()]){0,2}9[0-9]([ \-()]){0,2}(?:[0-9]([ \-()]){0,2}){8}$/,
@@ -9,7 +9,7 @@ export const sendOtpSchema = z.object({
     ),
 });
 export const checkOtpSchema = z.object({
-  phoneNumber: z
+  mobile: z
     .string()
     .regex(
       /^(\+98|0|98|0098)?([ \-()]){0,2}9[0-9]([ \-()]){0,2}(?:[0-9]([ \-()]){0,2}){8}$/,
