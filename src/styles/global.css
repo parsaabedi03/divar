@@ -1,5 +1,32 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --font-vazir: "Vazir", sans-serif;
+
+  /* Primary */
+  --color-primary: #d10f0f;
+  --color-primary-dark-1: #b40505;
+  --color-primary-dark-2: #9e0d0d;
+  --color-primary-light: #e01919;
+
+  /* Secondary */
+  --color-secondary: #ffb200;
+  --color-secondary-dark: #e89f00;
+  --color-secondary-light: #ffcf61;
+
+  /* Neutral */
+  --color-neutral: #afaaaa;
+  --color-neutral-dark-1: #2c2727;
+  --color-neutral-dark-2: #352f2f;
+  --color-neutral-light: #c4bebe;
+
+  /* Category / Services */
+  --color-services: #fa338d;
+  --color-jobs: #7d13df;
+  --color-goods: #e7d900;
+  --color-real-estate: #f76300;
+  --color-vehicles: #00b959;
+  --color-hr: #02a19d;
 }
