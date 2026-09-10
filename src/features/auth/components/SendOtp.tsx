@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -5,13 +6,15 @@ import { sendOtpSchema, type SendOtpFormValues } from "../schemas/auth.schema";
 import { useSendOtp } from "../hooks/useSendOtp";
 
 interface SendOtpProps {
+  mobile: string;
   onSuccess: (mobile: string) => void;
 }
 
-export const SendOtp = ({ onSuccess }: SendOtpProps) => {
+export const SendOtp = ({ onSuccess, mobile }: SendOtpProps) => {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<SendOtpFormValues>({ resolver: zodResolver(sendOtpSchema) });
 
@@ -23,19 +26,30 @@ export const SendOtp = ({ onSuccess }: SendOtpProps) => {
     });
   };
 
+  useEffect(() => {
+    if (mobile) {
+      setValue("mobile", mobile);
+    }
+  }, [mobile, setValue]);
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
       <div>
-        <label htmlFor="mobile" className="block mb-1 text-sm">
-          شماره موبایل خود را وارد کنید.
+        <p className="text-lg font-medium mbe-4">
+          شماره موبایل خود را وارد کنید
+        </p>
+        <label
+          htmlFor="mobile"
+          className="block mb-3 font-extralight text-base text-neutral"
+        >
+          کد تایید به این شماره پیامک می شود.
         </label>
-        <span>کد تایید به این شمراه پیامک می شود.</span>
         <input
           id="mobile"
           type="tel"
-          placeholder="09123456789"
+          placeholder="۰۹۱۲ ۱۲۳ ۴۵۶"
           {...register("mobile")}
-          className="w-full border rounded-lg px-3 py-2"
+          className="w-full border rounded-sm border-neutral hover:border-primary-light focus:outline-primary-light placeholder:font-extralight px-3 py-2"
         />
         {errors.mobile && (
           <p className="text-red-500 text-sm mt-1">{errors.mobile.message}</p>
@@ -47,13 +61,15 @@ export const SendOtp = ({ onSuccess }: SendOtpProps) => {
         </p>
       )}
 
-      <button
-        type="submit"
-        disabled={isPending}
-        className="bg-red-600 text-white rounded-lg py-2 disabled:opacity-50"
-      >
-        {isPending ? "در حال ارسال..." : "بعدی"}
-      </button>
+      <div className="mt-5 pt-5 text-left border-t border-t-emerald-100">
+        <button
+          type="submit"
+          disabled={isPending}
+          className="bg-primary w-fit text-white rounded-sm py-2 px-8 hover:bg-primary-dark-1 disabled:opacity-50 transition duration-200 ease-in-out"
+        >
+          {isPending ? "در حال ارسال..." : "بعدی"}
+        </button>
+      </div>
     </form>
   );
 };

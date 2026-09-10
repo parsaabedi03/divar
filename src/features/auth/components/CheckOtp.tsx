@@ -6,12 +6,16 @@ import {
 } from "../schemas/auth.schema";
 import { useCheckOtp } from "../hooks/useCheckOtp";
 
+import { Pencil, MessageSquareMore } from "lucide-react";
+import { e2p } from "@/shared/utils/replaceNumber";
+
 interface CheckOtpProps {
   mobile: string;
   onSuccess: () => void;
+  handleBack: () => void;
 }
 
-export const CheckOtp = ({ mobile, onSuccess }: CheckOtpProps) => {
+export const CheckOtp = ({ mobile, onSuccess, handleBack }: CheckOtpProps) => {
   const {
     register,
     handleSubmit,
@@ -30,19 +34,32 @@ export const CheckOtp = ({ mobile, onSuccess }: CheckOtpProps) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
       <input type="hidden" {...register("mobile")} />
-
       <div>
-        <label htmlFor="code" className="block mb-1 text-sm">
-          کد تایید ارسال شده به {mobile}
-        </label>
+        <div className="flex align-top justify-between mb-2">
+          <div className="flex align-middle">
+            <MessageSquareMore size={22} className="text-neutral" />
+            <div className="px-4">
+              <span className="self-center block mb-5">{e2p(mobile)}</span>
+              <label
+                htmlFor="code"
+                className="block mb-1 font-extralight text-base text-neutral"
+              >
+                کد تایید به شماره بالا فرستاده شد.
+              </label>
+            </div>
+          </div>
+          <button onClick={handleBack} className="h-fit">
+            <Pencil className="text-neutral" size={18} />
+          </button>
+        </div>
         <input
           id="code"
           type="text"
           inputMode="numeric"
           maxLength={5}
-          placeholder="12345"
+          placeholder="۱۲۳۴۵"
           {...register("code")}
-          className="w-full border rounded-lg px-3 py-2 text-center tracking-widest"
+          className="w-full border rounded-sm border-neutral hover:border-primary-light focus:outline-primary-light placeholder:font-extralight px-3 py-2 text-center tracking-widest"
         />
         {errors.code && (
           <p className="text-red-500 text-sm mt-1">{errors.code.message}</p>
@@ -51,13 +68,15 @@ export const CheckOtp = ({ mobile, onSuccess }: CheckOtpProps) => {
 
       {error && <p className="text-red-500 text-sm">کد وارد شده صحیح نیست</p>}
 
-      <button
-        type="submit"
-        disabled={isPending}
-        className="bg-blue-600 text-white rounded-lg py-2 disabled:opacity-50"
-      >
-        {isPending ? "در حال بررسی..." : "تایید کد"}
-      </button>
+      <div className="mt-5 pt-5 text-left border-t border-t-emerald-100">
+        <button
+          type="submit"
+          disabled={isPending}
+          className="bg-primary w-fit text-white rounded-sm py-2 px-8 hover:bg-primary-dark-1 disabled:opacity-50 transition duration-200 ease-in-out"
+        >
+          {isPending ? "در حال بررسی..." : "ورود"}
+        </button>
+      </div>
     </form>
   );
 };

@@ -26,23 +26,20 @@ export const AuthPage = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
-      <div className="w-full max-w-md bg-white rounded-2xl shadow-sm p-8">
-        <h1 className="text-xl font-bold text-center mb-6">
-          {step === "send-otp" ? "ورود / ثبت‌نام" : "تایید شماره موبایل"}
+      <div className="w-full max-w-md bg-white rounded-sm shadow-sm p-6">
+        <h1 className="text-lg text-neutral-dark-1 border-b border-b-emerald-100 pb-5 font-extralight mb-8">
+          ورود به حساب کاربری
         </h1>
-
-        {step === "send-otp" && <SendOtp onSuccess={handleOtpSent} />}
+        {step === "send-otp" && (
+          <SendOtp onSuccess={handleOtpSent} mobile={mobile} />
+        )}
 
         {step === "check-otp" && (
-          <>
-            <CheckOtp mobile={mobile} onSuccess={handleVerified} />
-            <button
-              onClick={handleBack}
-              className="text-sm text-gray-500 mt-4 w-full text-center"
-            >
-              ویرایش شماره موبایل
-            </button>
-          </>
+          <CheckOtp
+            mobile={mobile}
+            onSuccess={handleVerified}
+            handleBack={handleBack}
+          />
         )}
       </div>
     </div>
