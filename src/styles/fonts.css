@@ -1,38 +1,39 @@
 @font-face {
-  font-family: Vazir;
+  font-family: "Vazir";
   font-style: normal;
   font-weight: 100;
   src: url("../assets/fonts/Vazirmatn-Thin.ttf") format("truetype");
 }
 
 @font-face {
-  font-family: Vazir;
+  font-family: "Vazir";
   font-style: normal;
-  font-weight: 200;
+  font-weight: 400;
   src: url("../assets/fonts/Vazirmatn-Regular.ttf") format("truetype");
 }
 
 @font-face {
-  font-family: Vazir;
+  font-family: "Vazir";
   font-style: normal;
-  font-weight: 300;
+  font-weight: 500;
   src: url("../assets/fonts/Vazirmatn-Medium.ttf") format("truetype");
 }
 
 @font-face {
-  font-family: Vazir;
+  font-family: "Vazir";
   font-style: normal;
-  font-weight: 400;
+  font-weight: 700;
   src: url("../assets/fonts/Vazirmatn-Bold.ttf") format("truetype");
 }
 
 @font-face {
-  font-family: Vazir;
+  font-family: "Vazir";
   font-style: normal;
-  font-weight: 600;
+  font-weight: 800;
   src: url("../assets/fonts/Vazirmatn-ExtraBold.ttf") format("truetype");
 }
-
-html {
-  font-family: "Vazir", sans-serif;
+:root {
+  font-family: "Vazir", Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  line-height: 1.5;
 }
