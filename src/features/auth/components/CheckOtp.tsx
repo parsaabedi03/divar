@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -31,6 +32,12 @@ export const CheckOtp = ({ mobile, onSuccess, handleBack }: CheckOtpProps) => {
   const onSubmit = (values: CheckOtpFormValues) => {
     mutate(values, { onSuccess });
   };
+
+  useEffect(() => {
+    if (error) {
+      toast.error("کد وارد شده صحیح نیست");
+    }
+  }, [error]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
@@ -68,8 +75,6 @@ export const CheckOtp = ({ mobile, onSuccess, handleBack }: CheckOtpProps) => {
           </p>
         )}
       </div>
-
-      {error && toast.error("کد وارد شده صحیح نیست")}
 
       <div className="mt-5 pt-5 text-left border-t border-t-emerald-100">
         <button
