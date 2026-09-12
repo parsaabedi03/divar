@@ -8,6 +8,7 @@ import { useCheckOtp } from "../hooks/useCheckOtp";
 
 import { Pencil, MessageSquareMore } from "lucide-react";
 import { e2p } from "@/shared/utils/replaceNumber";
+import toast from "react-hot-toast";
 
 interface CheckOtpProps {
   mobile: string;
@@ -62,11 +63,13 @@ export const CheckOtp = ({ mobile, onSuccess, handleBack }: CheckOtpProps) => {
           className="w-full border rounded-sm border-neutral hover:border-primary-light focus:outline-primary-light font-normal px-3 py-2 text-center tracking-widest"
         />
         {errors.code && (
-          <p className="text-red-500 text-sm mt-1">{errors.code.message}</p>
+          <p className="text-red-500 text-sm mt-1 font-normal">
+            {errors.code.message}
+          </p>
         )}
       </div>
 
-      {error && <p className="text-red-500 text-sm">کد وارد شده صحیح نیست</p>}
+      {error && toast.error("کد وارد شده صحیح نیست")}
 
       <div className="mt-5 pt-5 text-left border-t border-t-emerald-100">
         <button

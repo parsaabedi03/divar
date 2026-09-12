@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { sendOtpSchema, type SendOtpFormValues } from "../schemas/auth.schema";
 import { useSendOtp } from "../hooks/useSendOtp";
+import toast from "react-hot-toast";
 
 interface SendOtpProps {
   mobile: string;
@@ -52,14 +53,12 @@ export const SendOtp = ({ onSuccess, mobile }: SendOtpProps) => {
           className="w-full border rounded-sm border-neutral hover:border-primary-light focus:outline-primary-light font-normal px-3 py-2"
         />
         {errors.mobile && (
-          <p className="text-red-500 text-sm mt-1">{errors.mobile.message}</p>
+          <p className="text-red-500 text-sm mt-1 font-normal">
+            {errors.mobile.message}
+          </p>
         )}
       </div>
-      {error && (
-        <p className="text-red-500 text-sm">
-          ارسال کد با خطا مواجه شد، دوباره تلاش کنید
-        </p>
-      )}
+      {error && toast.error("ارسال کد با خطا مواجه شد، دوباره تلاش کنید")}
 
       <div className="mt-5 pt-5 text-left border-t border-t-emerald-100">
         <button
