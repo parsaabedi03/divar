@@ -27,7 +27,7 @@ export const AuthPage = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
       <div className="w-full max-w-md bg-white rounded-sm shadow-sm p-6">
-        <h1 className="text-lg text-neutral-dark-1 border-b border-b-emerald-100 pb-5 font-extralight mb-8">
+        <h1 className="text-lg text-neutral-dark-1 border-b border-b-emerald-100 pb-5 font-normal mb-8">
           ورود به حساب کاربری
         </h1>
         {step === "send-otp" && (
