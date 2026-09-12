@@ -35,14 +35,14 @@ export const CheckOtp = ({ mobile, onSuccess, handleBack }: CheckOtpProps) => {
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
       <input type="hidden" {...register("mobile")} />
       <div>
-        <div className="flex align-top justify-between mb-2">
+        <div className="flex align-top justify-between mb-2 font-normal">
           <div className="flex align-middle">
             <MessageSquareMore size={22} className="text-neutral" />
             <div className="px-4">
               <span className="self-center block mb-5">{e2p(mobile)}</span>
               <label
                 htmlFor="code"
-                className="block mb-1 font-extralight text-base text-neutral"
+                className="block mb-1 text-base text-neutral"
               >
                 کد تایید به شماره بالا فرستاده شد.
               </label>
@@ -59,7 +59,7 @@ export const CheckOtp = ({ mobile, onSuccess, handleBack }: CheckOtpProps) => {
           maxLength={5}
           placeholder="۱۲۳۴۵"
           {...register("code")}
-          className="w-full border rounded-sm border-neutral hover:border-primary-light focus:outline-primary-light placeholder:font-extralight px-3 py-2 text-center tracking-widest"
+          className="w-full border rounded-sm border-neutral hover:border-primary-light focus:outline-primary-light font-normal px-3 py-2 text-center tracking-widest"
         />
         {errors.code && (
           <p className="text-red-500 text-sm mt-1">{errors.code.message}</p>
@@ -72,7 +72,7 @@ export const CheckOtp = ({ mobile, onSuccess, handleBack }: CheckOtpProps) => {
         <button
           type="submit"
           disabled={isPending}
-          className="bg-primary w-fit text-white rounded-sm py-2 px-8 hover:bg-primary-dark-1 disabled:opacity-50 transition duration-200 ease-in-out"
+          className="bg-primary w-fit font-normal text-base text-white rounded-sm py-2 px-8 hover:bg-primary-dark-1 disabled:opacity-50 transition duration-200 ease-in-out"
         >
           {isPending ? "در حال بررسی..." : "ورود"}
         </button>
