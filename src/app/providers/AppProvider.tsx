@@ -16,7 +16,7 @@ export function AppProvider({ children }: AppProviderProps) {
         <QueryProvider>
           <Toaster
             position="top-center"
-            toastOptions={{ className: "w-[90%] max-w-md" }}
+            toastOptions={{ className: "w-[90%] max-w-md font-normal" }}
           />
           {children}
         </QueryProvider>
