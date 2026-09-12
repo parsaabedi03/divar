@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { Toaster } from "react-hot-toast";
 
 import { ErrorBoundary } from "./ErrorBoundary";
 import { QueryProvider } from "./QueryProvider";
@@ -12,7 +13,13 @@ export function AppProvider({ children }: AppProviderProps) {
   return (
     <ErrorBoundary>
       <ThemeProvider>
-        <QueryProvider>{children}</QueryProvider>
+        <QueryProvider>
+          <Toaster
+            position="top-center"
+            toastOptions={{ className: "w-[90%] max-w-md" }}
+          />
+          {children}
+        </QueryProvider>
       </ThemeProvider>
     </ErrorBoundary>
   );
