@@ -1,6 +1,6 @@
 import { Outlet } from "react-router";
 
-import { Header } from "./Header";
+import { Header } from "@/shared/components/layouts/Header";
 
 export const LayoutProvider = () => {
   return (
