@@ -6,9 +6,9 @@ export const LayoutProvider = () => {
   return (
     <>
       <Header />
-      <main>
+      <div className="py-20">
         <Outlet />
-      </main>
+      </div>
     </>
   );
 };
