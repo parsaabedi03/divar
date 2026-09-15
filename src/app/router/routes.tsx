@@ -6,24 +6,30 @@ import { HomePage } from "@/pages/HomePage";
 import { AuthPage } from "@/pages/AuthPage";
 import { DashboardPage } from "@/pages/DashboardPage";
 import { NotFoundPage } from "@/pages/NotFoundPage";
+import { LayoutProvider } from "@/shared/components/layouts";
 
 export const routes: RouteObject[] = [
   {
-    path: ROUTES.HOME,
-    element: <HomePage />,
+    element: <LayoutProvider />,
+    children: [
+      {
+        path: ROUTES.HOME,
+        element: <HomePage />,
+      },
+      {
+        element: <ProtectedRoute />,
+        children: [
+          {
+            path: ROUTES.DASHBOARD,
+            element: <DashboardPage />,
+          },
+        ],
+      },
+    ],
   },
   {
     path: ROUTES.AUTH,
     element: <AuthPage />,
-  },
-  {
-    element: <ProtectedRoute />,
-    children: [
-      {
-        path: ROUTES.DASHBOARD,
-        element: <DashboardPage />,
-      },
-    ],
   },
   {
     path: ROUTES.NOT_FOUND,
