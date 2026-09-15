@@ -1,14 +1,14 @@
 import { Outlet } from "react-router";
 
-import { Header } from "./Header";
+import { Header } from "@/shared/components/layouts/Header";
 
 export const LayoutProvider = () => {
   return (
     <>
       <Header />
-      <main>
+      <div className="py-20">
         <Outlet />
-      </main>
+      </div>
     </>
   );
 };
