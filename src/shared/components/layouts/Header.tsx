@@ -32,12 +32,12 @@ export const Header = () => {
     }`;
 
   return (
-    <header className="fixed inset-0">
-      <div className="border-b border-emerald-200 bg-white relative z-50">
+    <header className="fixed inset-0 pointer-events-none">
+      <div className="border-b border-emerald-200 bg-white relative z-50 pointer-events-auto">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex items-center justify-between h-16 gap-4">
             <Link to={ROUTES.HOME} className="flex items-center gap-2 shrink-0">
-              <img src="./divar.svg" alt="logo" className="w-10" />
+              <img src="divar.svg" alt="logo" className="w-10" />
             </Link>
 
             <div className="flex flex-1 max-w-xl">
@@ -74,7 +74,7 @@ export const Header = () => {
                       </Link>
                     )}
                     <Link
-                      to={ROUTES.AUTH}
+                      to={ROUTES.DASHBOARD_SETTINGS}
                       className="flex items-center gap-1 text-sm font-normal border-b border-emerald-200 last:border-0 py-2"
                     >
                       <Settings className="text-neutral" />
@@ -97,7 +97,7 @@ export const Header = () => {
               </div>
 
               <Link
-                to={ROUTES.AUTH}
+                to={ROUTES.NEW_POST}
                 className="text-sm font-medium text-white rounded-sm p-3 bg-primary hover:bg-primary-dark-1 transition duration-200 ease-in-out"
               >
                 ثبت آگهی
@@ -121,11 +121,11 @@ export const Header = () => {
           <House size={20} />
           <span>خانه</span>
         </NavLink>
-        <NavLink to={ROUTES.HOME} className={navLinkClass}>
+        <NavLink to={ROUTES.NEW_POST} className={navLinkClass}>
           <CirclePlus size={20} />
           <span>ثبت آگهی</span>
         </NavLink>
-        <NavLink to={ROUTES.HOME} className={navLinkClass}>
+        <NavLink to={ROUTES.USER} className={navLinkClass}>
           <User size={20} />
           <span>دیوار من</span>
         </NavLink>
