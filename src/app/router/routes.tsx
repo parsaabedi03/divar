@@ -5,7 +5,7 @@ import { ProtectedRoute } from "./ProtectedRoute";
 import { HomePage } from "@/pages/HomePage";
 import { AuthPage } from "@/pages/AuthPage";
 import { NotFoundPage } from "@/pages/NotFoundPage";
-import { LayoutProvider } from "@/shared/components/layouts";
+import { LayoutProvider } from "./MainLayout";
 // import { DashboardHomePage } from "@/pages/dashboard/DashboardHomePage";
 import { DashboardLayout } from "./DashboardLayout";
 import { MyPostsPage } from "@/pages/dashboard/MyPostsPage";
