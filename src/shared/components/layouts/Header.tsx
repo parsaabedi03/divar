@@ -5,12 +5,33 @@ import { CirclePlus, House, LogIn, Search, Settings, User } from "lucide-react";
 import { ROUTES } from "@/config/routes";
 import { deleteCookie, getCookie } from "@/shared/utils/cookieHelpers";
 
+const MOBILE_BREAKPOINT = 900;
+
+const useIsMobile = (breakpoint: number = MOBILE_BREAKPOINT) => {
+  const [isMobile, setIsMobile] = useState(
+    () => window.innerWidth < breakpoint,
+  );
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < breakpoint);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [breakpoint]);
+
+  return isMobile;
+};
+
+const navLinkClass = ({ isActive }: { isActive: boolean }) =>
+  `flex flex-col items-center justify-center gap-1 text-sm font-bold border-b ${
+    isActive ? "text-primary border-primary" : "text-neutral"
+  }`;
+
 export const Header = () => {
   const [openMenu, setOpenMenu] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
-  const [url, setUrl] = useState("");
   const menuRef = useRef<HTMLDivElement>(null);
   const { pathname } = useLocation();
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -19,26 +40,27 @@ export const Header = () => {
       }
     };
 
+    setIsLogin(Boolean(getCookie("accessToken")));
+
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  useEffect(() => {
-    const token = getCookie("accessToken");
-    if (token) setIsLogin(true);
-  }, []);
-  useEffect(() => {
-    setUrl(pathname);
-  }, [pathname]);
+  const isUserPage = pathname === ROUTES.USER;
+  const isNewPostPage = pathname === ROUTES.NEW_POST;
+  const isDashboardPage = pathname.startsWith(ROUTES.DASHBOARD);
 
-  const navLinkClass = ({ isActive }: { isActive: boolean }) =>
-    `flex flex-col items-center justify-center gap-1 text-sm font-bold border-b ${
-      isActive ? "text-primary border-primary" : "text-neutral"
-    }`;
+  const hideTopBar = isUserPage || (isNewPostPage && isMobile);
+  const hideSearch = isDashboardPage || isNewPostPage;
+
+  const handleLogout = () => {
+    deleteCookie("accessToken");
+    deleteCookie("refreshToken");
+  };
 
   return (
     <header className="fixed inset-0 pointer-events-none">
-      {url !== "/user" && (
+      {!hideTopBar && (
         <div className="border-b border-emerald-200 bg-white relative z-50 pointer-events-auto">
           <div className="max-w-7xl mx-auto px-4">
             <div className="flex items-center justify-between h-16 gap-4">
@@ -49,7 +71,7 @@ export const Header = () => {
                 <img src="divar.svg" alt="logo" className="w-10" />
               </Link>
 
-              {!url.startsWith(ROUTES.DASHBOARD) && (
+              {!hideSearch && (
                 <div className="flex flex-1 max-w-xl">
                   <div className="relative w-full">
                     <Search
@@ -69,7 +91,11 @@ export const Header = () => {
                 <div className="relative" ref={menuRef}>
                   <button
                     onClick={() => setOpenMenu(true)}
-                    className={`text-sm font-medium z-10 p-3 rounded-sm hover:bg-neutral-light hover:text-neutral-dark-2 transition duration-200 ease-in-out ${openMenu ? "text-neutral-dark-2 bg-neutral-light" : "text-neutral"}`}
+                    className={`text-sm font-medium z-10 p-3 rounded-sm hover:bg-neutral-light hover:text-neutral-dark-2 transition duration-200 ease-in-out ${
+                      openMenu
+                        ? "text-neutral-dark-2 bg-neutral-light"
+                        : "text-neutral"
+                    }`}
                   >
                     دیوار من
                   </button>
@@ -96,10 +122,7 @@ export const Header = () => {
                       </Link>
                       {isLogin && (
                         <button
-                          onClick={() => {
-                            deleteCookie("accessToken");
-                            deleteCookie("refreshToken");
-                          }}
+                          onClick={handleLogout}
                           className="flex items-center gap-1 text-sm font-normal py-2"
                         >
                           <LogIn className="text-primary" />
@@ -129,7 +152,7 @@ export const Header = () => {
             : "opacity-0 pointer-events-none"
         }`}
         onClick={() => setOpenMenu(false)}
-      ></div>
+      />
 
       <div className="flex md:hidden align-middle justify-around absolute bottom-0 w-full h-fit z-50 bg-white border-t p-2 border-emerald-200 pointer-events-auto">
         <NavLink to={ROUTES.HOME} className={navLinkClass}>
