@@ -22,25 +22,23 @@ export const routes: RouteObject[] = [
         element: <HomePage />,
       },
       {
-        element: <ProtectedRoute />,
+        element: <DashboardLayout />,
         children: [
-          { path: ROUTES.NEW_POST, element: <NewPostPage /> },
           {
-            element: <DashboardLayout />,
-            children: [
-              {
-                path: ROUTES.DASHBOARD,
-                element: <Navigate to={ROUTES.DASHBOARD_MY_POSTS} />,
-              },
-              { path: ROUTES.DASHBOARD_MY_POSTS, element: <MyPostsPage /> },
-              { path: ROUTES.DASHBOARD_SETTINGS, element: <SettingsPage /> },
-            ],
+            path: ROUTES.DASHBOARD,
+            element: <Navigate to={ROUTES.DASHBOARD_MY_POSTS} />,
           },
+          { path: ROUTES.DASHBOARD_MY_POSTS, element: <MyPostsPage /> },
+          { path: ROUTES.DASHBOARD_SETTINGS, element: <SettingsPage /> },
         ],
+      },
+      { path: ROUTES.USER, element: <UserPage /> },
+      {
+        element: <ProtectedRoute />,
+        children: [{ path: ROUTES.NEW_POST, element: <NewPostPage /> }],
       },
     ],
   },
-  { path: ROUTES.USER, element: <UserPage /> },
   {
     path: ROUTES.AUTH,
     element: <AuthPage />,
