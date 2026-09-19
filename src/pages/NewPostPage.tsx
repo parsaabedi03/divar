@@ -1,3 +1,9 @@
+import { CreatePost } from "@/features/posts";
+
 export const NewPostPage = () => {
-  return <div>فرم ثبت آگهی جدید</div>;
+  return (
+    <div>
+      <CreatePost />
+    </div>
+  );
 };

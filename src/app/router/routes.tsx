@@ -12,6 +12,7 @@ import { MyPostsPage } from "@/pages/dashboard/MyPostsPage";
 import { SettingsPage } from "@/pages/dashboard/SettingsPage";
 import { NewPostPage } from "@/pages/NewPostPage";
 import { UserPage } from "@/pages/UserPage";
+import { PostDetailPage } from "@/pages/PostDetailPage";
 
 export const routes: RouteObject[] = [
   {
@@ -32,6 +33,7 @@ export const routes: RouteObject[] = [
           { path: ROUTES.DASHBOARD_SETTINGS, element: <SettingsPage /> },
         ],
       },
+      { path: ROUTES.POST_DETAIL, element: <PostDetailPage /> },
       { path: ROUTES.USER, element: <UserPage /> },
       {
         element: <ProtectedRoute />,
