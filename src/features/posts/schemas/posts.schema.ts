@@ -19,8 +19,8 @@ export const createPostFormSchema = z.object({
   options: z.record(z.string(), z.unknown()).optional(),
 });
 
-export type CreatePostFormValues = z.infer<typeof createPostFormSchema>;
-export type CreatePostFormInput = z.infer<typeof createPostFormSchema>;
+export type CreatePostFormValues = z.output<typeof createPostFormSchema>;
+export type CreatePostFormInput = z.input<typeof createPostFormSchema>;
 
 export const STEP_FIELDS = {
   1: ["title", "content", "images"],
