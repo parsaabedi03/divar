@@ -1,4 +1,4 @@
-import { MyPosts } from "@/features/posts/components/MyPosts";
+import { MyPosts } from "@/features/posts";
 
 export const MyPostsPage = () => {
   return (
