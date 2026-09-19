@@ -68,7 +68,7 @@ export const Header = () => {
                 to={ROUTES.HOME}
                 className="flex items-center gap-2 shrink-0"
               >
-                <img src="divar.svg" alt="logo" className="w-10" />
+                <img src="/divar.svg" alt="logo" className="w-10" />
               </Link>
 
               {!hideSearch && (
