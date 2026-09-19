@@ -46,7 +46,9 @@ export const createPostRequest = async (
 
   Object.entries(payload).forEach(([key, value]) => {
     if (key === "images" && Array.isArray(value)) {
-      value.forEach((file) => formData.append("images", file));
+      value.forEach((file) => {
+        if (file instanceof File) formData.append("images", file);
+      });
       return;
     }
     if (key === "coordinate" && Array.isArray(value)) {
