@@ -4,6 +4,7 @@ export const ROUTES = {
   DASHBOARD: "/dashboard",
   USER: "/user",
   NEW_POST: "/new",
+  POST_DETAIL: "/post/:id",
   DASHBOARD_SETTINGS: "/dashboard/settings",
   DASHBOARD_MY_POSTS: "/dashboard/my-posts",
   NOT_FOUND: "*",
