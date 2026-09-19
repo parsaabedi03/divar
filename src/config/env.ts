@@ -8,4 +8,5 @@ const getEnvVar = (key: keyof ImportMetaEnv): string => {
 
 export const env = {
   apiUrl: getEnvVar("VITE_BASE_URL"),
+  mapKey: getEnvVar("VITE_MAP_API_KEY"),
 } as const;
