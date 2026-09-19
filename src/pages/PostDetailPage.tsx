@@ -1,15 +1,10 @@
 import { useState } from "react";
 import { useParams } from "react-router";
-import {
-  ChevronLeft,
-  ChevronRight,
-  Share2,
-  Bookmark,
-  MapPin,
-} from "lucide-react";
+import { ChevronLeft, ChevronRight, Share2 } from "lucide-react";
 
 import { env } from "@/config/env";
 import { useGetPostById } from "@/features/posts/hooks/usePost";
+import { PostLocationMap } from "@/shared/components/ui/PostLocationMap";
 
 export const PostDetailPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -22,18 +17,14 @@ export const PostDetailPage = () => {
   const prevImage = () =>
     setCurrentImage((prev) => (prev - 1 + images.length) % images.length);
 
-  if (!id) {
+  if (!id || !data) {
     return <div>Post not found</div>;
   }
 
   if (isPending) return <div>Loading...</div>;
 
-  if (!data) {
-    return <div>Post not found</div>;
-  }
-
   return (
-    <div className="max-w-7xl mx-auto px-4 py-6 text-neutral-dark-2">
+    <div className="max-w-7xl mx-auto px-4 py-6 text-neutral-dark-2 font-normal">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
         <aside className="order-2 md:order-1 space-y-4">
           <div className="border border-emerald-200 rounded-sm p-4 space-y-3">
@@ -42,15 +33,16 @@ export const PostDetailPage = () => {
               {new Date(data.createdAt).toLocaleDateString("fa-IR")} در
               {data.city}
             </p>
-
+            <div>
+              <h2 className="font-bold mb-2">توضیحات</h2>
+              <p className="text-sm leading-7 whitespace-pre-line">
+                {data.content}
+              </p>
+            </div>
             <div className="flex items-center gap-4 border-t border-emerald-200 pt-3 text-neutral">
               <button className="flex items-center gap-1 text-xs hover:text-primary">
                 <Share2 size={16} />
                 <span>اشتراک‌گذاری</span>
-              </button>
-              <button className="flex items-center gap-1 text-xs hover:text-primary">
-                <Bookmark size={16} />
-                <span>ذخیره آگهی</span>
               </button>
             </div>
 
@@ -70,7 +62,7 @@ export const PostDetailPage = () => {
         </aside>
 
         <div className="md:col-span-2 space-y-5 order-1 md:order-2">
-          <div className="relative rounded-sm overflow-hidden bg-neutral-light aspect-4/3">
+          <div className="relative z-10 rounded-sm overflow-hidden bg-neutral-light aspect-4/3">
             {images.length > 0 ? (
               <img
                 src={`${env.apiUrl}/${images[currentImage]}`}
@@ -115,23 +107,9 @@ export const PostDetailPage = () => {
           </div>
 
           <section className="border-t border-emerald-200 pt-4">
-            <h2 className="font-bold mb-2">توضیحات</h2>
-            <p className="text-sm leading-7 whitespace-pre-line">
-              {data.content}
-            </p>
-          </section>
-
-          {/* نقشه */}
-          <section className="border-t border-emerald-200 pt-4">
             <h2 className="font-bold mb-2">موقعیت مکانی</h2>
             <div className="relative h-52 rounded-sm overflow-hidden bg-neutral-light">
-              <div className="w-full h-full flex items-center justify-center">
-                <MapPin
-                  className="text-primary"
-                  size={32}
-                  fill="currentColor"
-                />
-              </div>
+              <PostLocationMap coordinate={data.coordinate} />
             </div>
             <p className="text-xs text-neutral mt-2">{data.address}</p>
           </section>
