@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useParams } from "react-router";
+import { useParams } from "react-router";
 import {
   ChevronLeft,
   ChevronRight,
@@ -28,15 +28,19 @@ export const PostDetailPage = () => {
 
   if (isPending) return <div>Loading...</div>;
 
+  if (!data) {
+    return <div>Post not found</div>;
+  }
+
   return (
     <div className="max-w-7xl mx-auto px-4 py-6 text-neutral-dark-2">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
         <aside className="order-2 md:order-1 space-y-4">
           <div className="border border-emerald-200 rounded-sm p-4 space-y-3">
-            <h1 className="hidden md:block text-lg font-bold">{data?.title}</h1>
+            <h1 className="hidden md:block text-lg font-bold">{data.title}</h1>
             <p className="hidden md:block text-xs text-neutral">
-              {new Date(data?.createdAt).toLocaleDateString("fa-IR")} در
-              {data?.city}
+              {new Date(data.createdAt).toLocaleDateString("fa-IR")} در
+              {data.city}
             </p>
 
             <div className="flex items-center gap-4 border-t border-emerald-200 pt-3 text-neutral">
@@ -55,11 +59,11 @@ export const PostDetailPage = () => {
             </button>
           </div>
 
-          {data?.amount ? (
+          {data.amount ? (
             <div className="border border-emerald-200 rounded-sm p-4">
               <h2 className="font-bold mb-1 text-sm">مبلغ</h2>
               <p className="text-primary font-bold">
-                {data?.amount.toLocaleString("fa-IR")} تومان
+                {data.amount.toLocaleString("fa-IR")} تومان
               </p>
             </div>
           ) : null}
@@ -70,7 +74,7 @@ export const PostDetailPage = () => {
             {images.length > 0 ? (
               <img
                 src={`${env.apiUrl}/${images[currentImage]}`}
-                alt={data?.title}
+                alt={data.title}
                 className="w-full h-full object-cover"
               />
             ) : (
@@ -103,17 +107,17 @@ export const PostDetailPage = () => {
           </div>
 
           <div className="md:hidden">
-            <h1 className="text-lg font-bold">{data?.title}</h1>
+            <h1 className="text-lg font-bold">{data.title}</h1>
             <p className="text-xs text-neutral mt-1">
-              {new Date(data?.createdAt).toLocaleDateString("fa-IR")} در
-              {data?.city}
+              {new Date(data.createdAt).toLocaleDateString("fa-IR")} در
+              {data.city}
             </p>
           </div>
 
           <section className="border-t border-emerald-200 pt-4">
             <h2 className="font-bold mb-2">توضیحات</h2>
             <p className="text-sm leading-7 whitespace-pre-line">
-              {data?.content}
+              {data.content}
             </p>
           </section>
 
@@ -129,7 +133,7 @@ export const PostDetailPage = () => {
                 />
               </div>
             </div>
-            <p className="text-xs text-neutral mt-2">{data?.address}</p>
+            <p className="text-xs text-neutral mt-2">{data.address}</p>
           </section>
         </div>
       </div>
