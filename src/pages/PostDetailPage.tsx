@@ -1,4 +1,4 @@
-import { PostDetail } from "@/features/posts/components/PostDetail";
+import { PostDetail } from "@/features/posts";
 
 export const PostDetailPage = () => {
   return <PostDetail />;

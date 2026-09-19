@@ -1,4 +1,4 @@
-import { CreatePost } from "@/features/posts/components/formPost/CreatePost";
+import { CreatePost } from "@/features/posts";
 
 export const NewPostPage = () => {
   return (

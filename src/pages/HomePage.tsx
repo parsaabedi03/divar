@@ -1,4 +1,4 @@
-import { PostCard } from "@/features/posts/components/PostCard";
+import { PostCard } from "@/features/posts";
 
 export const HomePage = () => {
   return (
