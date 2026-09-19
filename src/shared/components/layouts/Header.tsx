@@ -59,7 +59,7 @@ export const Header = () => {
   };
 
   return (
-    <header className="fixed inset-0 pointer-events-none">
+    <header className="fixed inset-0 z-50 pointer-events-none">
       {!hideTopBar && (
         <div className="border-b border-emerald-200 bg-white relative z-50 pointer-events-auto">
           <div className="max-w-7xl mx-auto px-4">
@@ -68,7 +68,7 @@ export const Header = () => {
                 to={ROUTES.HOME}
                 className="flex items-center gap-2 shrink-0"
               >
-                <img src="divar.svg" alt="logo" className="w-10" />
+                <img src="/divar.svg" alt="logo" className="w-10" />
               </Link>
 
               {!hideSearch && (
