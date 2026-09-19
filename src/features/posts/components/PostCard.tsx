@@ -10,7 +10,7 @@ export const PostCard = () => {
   if (isPending) <div>در حال بررسی</div>;
 
   return (
-    <div>
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
       {data?.map((post) => (
         <Link
           to={`/post/${post._id}`}
