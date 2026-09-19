@@ -59,7 +59,7 @@ export const Header = () => {
   };
 
   return (
-    <header className="fixed inset-0 pointer-events-none">
+    <header className="fixed inset-0 z-50 pointer-events-none">
       {!hideTopBar && (
         <div className="border-b border-emerald-200 bg-white relative z-50 pointer-events-auto">
           <div className="max-w-7xl mx-auto px-4">
