@@ -1,32 +1,16 @@
-import { useEffect, useState } from "react";
 import { Navigate, Outlet } from "react-router";
 
-import axiosInstance from "@/lib/axios";
 import { ROUTES } from "@/config/routes";
-
-type AuthStatus = "loading" | "authenticated" | "unauthenticated";
+import { useAuth } from "@/app/providers/AuthProvider";
 
 export const ProtectedRoute = () => {
-  const [status, setStatus] = useState<AuthStatus>("loading");
+  const { user, isLoading } = useAuth();
 
-  useEffect(() => {
-    const checkAuth = async () => {
-      try {
-        await axiosInstance.get("/user/whoami");
-        setStatus("authenticated");
-      } catch {
-        setStatus("unauthenticated");
-      }
-    };
-
-    checkAuth();
-  }, []);
-
-  if (status === "loading") {
+  if (isLoading) {
     return <div>در حال بررسی ورود...</div>;
   }
 
-  if (status === "unauthenticated") {
+  if (!user) {
     return <Navigate to={ROUTES.AUTH} replace />;
   }
 
