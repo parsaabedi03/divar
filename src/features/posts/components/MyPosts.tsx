@@ -1,11 +1,12 @@
 import { env } from "@/config/env";
 import { useDeletePost, useMyPost } from "../hooks/usePost";
+import { Loader } from "@/shared/components/ui/Loader";
 
 export const MyPosts = () => {
   const { data, isPending } = useMyPost();
   const { mutate } = useDeletePost();
 
-  if (isPending) return <div>در حال بررسی</div>;
+  if (isPending) return <Loader />;
 
   return (
     <div>
