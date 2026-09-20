@@ -10,6 +10,7 @@ import { useCheckOtp } from "../hooks/useCheckOtp";
 import { Pencil, MessageSquareMore } from "lucide-react";
 import { e2p } from "@/shared/utils/replaceNumber";
 import toast from "react-hot-toast";
+import { useAuth } from "@/app/providers/AuthProvider";
 
 interface CheckOtpProps {
   mobile: string;
@@ -28,9 +29,10 @@ export const CheckOtp = ({ mobile, onSuccess, handleBack }: CheckOtpProps) => {
   });
 
   const { mutate, isPending, error } = useCheckOtp();
+  const { refreshUser } = useAuth();
 
   const onSubmit = (values: CheckOtpFormValues) => {
-    mutate(values, { onSuccess });
+    mutate(values, { onSuccess: async () => { await refreshUser(); onSuccess(); } });
   };
 
   useEffect(() => {
