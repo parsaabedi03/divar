@@ -3,7 +3,8 @@ import { Link, NavLink, useLocation } from "react-router";
 import { CirclePlus, House, LogIn, Search, Settings, User } from "lucide-react";
 
 import { ROUTES } from "@/config/routes";
-import { deleteCookie, getCookie } from "@/shared/utils/cookieHelpers";
+import { deleteCookie } from "@/shared/utils/cookieHelpers";
+import { useAuth } from "@/app/providers/AuthProvider";
 
 const MOBILE_BREAKPOINT = 900;
 
@@ -28,10 +29,11 @@ const navLinkClass = ({ isActive }: { isActive: boolean }) =>
 
 export const Header = () => {
   const [openMenu, setOpenMenu] = useState(false);
-  const [isLogin, setIsLogin] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const { pathname } = useLocation();
   const isMobile = useIsMobile();
+  const { clearUser, user } = useAuth();
+  const isLogin = Boolean(user);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -39,8 +41,6 @@ export const Header = () => {
         setOpenMenu(false);
       }
     };
-
-    setIsLogin(Boolean(getCookie("accessToken")));
 
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
@@ -56,6 +56,7 @@ export const Header = () => {
   const handleLogout = () => {
     deleteCookie("accessToken");
     deleteCookie("refreshToken");
+    clearUser();
   };
 
   return (
@@ -100,7 +101,10 @@ export const Header = () => {
                     دیوار من
                   </button>
                   {openMenu && (
-                    <div className="absolute top-[120%] right-0 bg-white w-60 rounded-sm p-3 shadow-xl/30">
+                    <div
+                      className="absolute top-[120%] right-0 bg-white w-60 rounded-sm p-3 shadow-xl/30"
+                      onClick={() => setOpenMenu(false)}
+                    >
                       {!isLogin && (
                         <Link
                           to={ROUTES.AUTH}
@@ -114,11 +118,11 @@ export const Header = () => {
                         </Link>
                       )}
                       <Link
-                        to={ROUTES.DASHBOARD_SETTINGS}
+                        to={ROUTES.DASHBOARD_MY_POSTS}
                         className="flex items-center gap-1 text-sm font-normal border-b border-emerald-200 last:border-0 py-2"
                       >
                         <Settings className="text-neutral" />
-                        <span>تنظیمات</span>
+                        <span>داشبورد</span>
                       </Link>
                       {isLogin && (
                         <button
