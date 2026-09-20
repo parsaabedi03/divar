@@ -7,7 +7,7 @@ import { Link } from "react-router";
 export const PostCard = () => {
   const { data, isPending } = useGetAllPosts();
 
-  if (isPending) <div>در حال بررسی</div>;
+  if (isPending) return <div>در حال بررسی</div>;
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
