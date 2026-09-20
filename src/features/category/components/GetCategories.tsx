@@ -1,3 +1,4 @@
+import { Loader } from "@/shared/components/ui/Loader";
 import { useDeleteCategory, useGetAllCategories } from "../hooks/useCategory";
 
 export const GetCategories = () => {
@@ -8,12 +9,13 @@ export const GetCategories = () => {
     if (window.confirm("آیا از حذف این دسته‌بندی مطمئن هستید؟")) mutate(id);
   };
 
+  if (isPending) return <Loader />;
+
   return (
     <div className="font-normal">
       <h3 className="font-normal text-neutral-dark-1 text-lg mb-5 border-b-2 border-primary w-fit">
         دسته بندی ها
       </h3>
-      {isPending && <h4>در حال لود شدن</h4>}
       {isError && (
         <p className="rounded-sm bg-red-50 p-3 text-sm text-red-600">
           دریافت دسته‌بندی‌ها با خطا مواجه شد. دوباره تلاش کنید.
