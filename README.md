@@ -8,8 +8,8 @@ A modern, full-featured clone of [Divar](https://divar.ir) — Iran's largest on
 
 ## 🔗 Live Demo
 
-**Frontend:** [your-vercel-url.vercel.app](https://divar-gamma.vercel.app/)
-**Backend API:** [your-app.up.railway.app](https://divar-api-production.up.railway.app)
+**Frontend:** [website](https://divar-gamma.vercel.app/)
+**Backend API:** [link](https://divar-api-production.up.railway.app)
 
 ### 🔑 Demo Login (no real SMS required)
 
