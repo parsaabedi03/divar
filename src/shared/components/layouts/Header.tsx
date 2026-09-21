@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Link, NavLink, useLocation } from "react-router";
+import { Link, NavLink, useLocation, useSearchParams } from "react-router";
 import { CirclePlus, House, LogIn, Search, Settings, User } from "lucide-react";
 
 import { ROUTES } from "@/config/routes";
@@ -30,6 +30,7 @@ const navLinkClass = ({ isActive }: { isActive: boolean }) =>
 export const Header = () => {
   const [openMenu, setOpenMenu] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+  const [searchParams, setSearchParams] = useSearchParams();
   const { pathname } = useLocation();
   const isMobile = useIsMobile();
   const { clearUser, user } = useAuth();
@@ -59,6 +60,14 @@ export const Header = () => {
     clearUser();
   };
 
+  const handleSearch = (value: string) => {
+    setSearchParams((prev) => {
+      const newParams = new URLSearchParams(prev);
+      newParams.set("search", value);
+      return newParams;
+    });
+  };
+
   return (
     <header className="fixed inset-0 z-50 pointer-events-none">
       {!hideTopBar && (
@@ -82,6 +91,8 @@ export const Header = () => {
                     <input
                       type="text"
                       placeholder="جستجو در دیوار"
+                      value={searchParams.get("search") || ""}
+                      onChange={(e) => handleSearch(e.target.value)}
                       className="w-full border rounded-sm border-neutral hover:border-primary-light focus:outline-primary-light font-normal ps-10 py-2"
                     />
                   </div>
