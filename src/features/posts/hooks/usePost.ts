@@ -7,6 +7,7 @@ import {
   getAllPostsRequest,
   getPostByIdRequest,
   getPostCreateDataRequest,
+  type QueryProps,
 } from "../api/posts.api";
 import { postsKeys } from "../api/posts.keys";
 
@@ -44,10 +45,10 @@ export const useGetPostById = (id: string) => {
   });
 };
 
-export const useGetAllPosts = () => {
+export const useGetAllPosts = (query: QueryProps) => {
   return useQuery({
-    queryKey: postsKeys.list(),
-    queryFn: getAllPostsRequest,
+    queryKey: postsKeys.list(query),
+    queryFn: () => getAllPostsRequest(query),
   });
 };
 

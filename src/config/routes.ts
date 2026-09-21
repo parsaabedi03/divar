@@ -7,5 +7,6 @@ export const ROUTES = {
   POST_DETAIL: "/post/:id",
   DASHBOARD_SETTINGS: "/dashboard/settings",
   DASHBOARD_MY_POSTS: "/dashboard/my-posts",
+  DASHBOARD_ADMIN_CATEGORIES: "/dashboard/admin/categories",
   NOT_FOUND: "*",
 } as const;

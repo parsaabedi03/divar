@@ -34,6 +34,11 @@ export interface PostCreateData {
   showBack: boolean;
 }
 
+export type QueryProps = {
+  category: string;
+  search: string;
+};
+
 export const getPostCreateDataRequest = async (): Promise<PostCreateData> => {
   const { data } = await axiosInstance.get("/post/create");
   return data;
@@ -81,10 +86,16 @@ export const getPostByIdRequest = async (id: string): Promise<Post> => {
   return post;
 };
 
-export const getAllPostsRequest = async (): Promise<Post[]> => {
+export const getAllPostsRequest = async (
+  query: QueryProps,
+): Promise<Post[]> => {
+  const filteredParams = Object.fromEntries(
+    Object.entries(query).filter(([_, value]) => value !== "" && value != null),
+  );
+
   const {
     data: { posts },
-  } = await axiosInstance.get("/");
+  } = await axiosInstance.get("/", { params: filteredParams });
   return posts;
 };
 

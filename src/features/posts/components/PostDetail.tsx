@@ -5,6 +5,7 @@ import { ChevronLeft, ChevronRight, Share2 } from "lucide-react";
 import { env } from "@/config/env";
 import { useGetPostById } from "@/features/posts/hooks/usePost";
 import { PostLocationMap } from "@/shared/components/ui/PostLocationMap";
+import { Loader } from "@/shared/components/ui/Loader";
 
 export const PostDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -17,10 +18,10 @@ export const PostDetail = () => {
   const prevImage = () =>
     setCurrentImage((prev) => (prev - 1 + images.length) % images.length);
 
-  if (isPending) return <div>Loading...</div>;
+  if (isPending) return <Loader />;
 
   if (!id || !data) {
-    return <div>Post not found</div>;
+    return <div>آکهی مورد نظر پیدا نشد</div>;
   }
 
   return (
