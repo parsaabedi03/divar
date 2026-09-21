@@ -1,20 +1,18 @@
 import { Link } from "react-router";
 
-import { Loader } from "@/shared/components/ui/Loader";
-
-import { useGetAllPosts } from "../hooks/usePost";
 import { env } from "@/config/env";
 import { shortenText } from "@/shared/helper/helper";
 import { sp } from "@/shared/utils/replaceNumber";
+import type { Post } from "../api/posts.api";
 
-export const PostCard = () => {
-  const { data, isPending } = useGetAllPosts();
+interface PostCardProps {
+  posts: Post[];
+}
 
-  if (isPending) return <Loader />;
-
+export const PostCard = ({ posts }: PostCardProps) => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-      {data?.map((post) => (
+      {posts?.map((post) => (
         <Link
           to={`/post/${post._id}`}
           key={post._id}
