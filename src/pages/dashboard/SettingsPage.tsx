@@ -1,3 +1,10 @@
+import { MobileHeader } from "@/shared/components/ui/MobileHeader";
+
 export const SettingsPage = () => {
-  return <div>تنظیمات حساب کاربری</div>;
+  return (
+    <div>
+      <MobileHeader text="تنطیمات" needArrow={true} />
+      تنظیمات حساب کاربری
+    </div>
+  );
 };
