@@ -51,7 +51,11 @@ export const Header = () => {
   const isNewPostPage = pathname === ROUTES.NEW_POST;
   const isDashboardPage = pathname.startsWith(ROUTES.DASHBOARD);
 
-  const hideTopBar = isUserPage || (isNewPostPage && isMobile);
+  const hideTopBar =
+    isUserPage ||
+    (isNewPostPage && isMobile) ||
+    (window.innerWidth < MOBILE_BREAKPOINT &&
+      pathname.startsWith(ROUTES.DASHBOARD));
   const hideSearch = isDashboardPage || isNewPostPage;
 
   const handleLogout = () => {
